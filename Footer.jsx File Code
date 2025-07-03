@@ -1,0 +1,57 @@
+import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+ import './Footer.css';
+
+const Footer = () => {
+  return (
+    <footer>
+        <div className="footer-panel1">
+           <a href='#top' style={{textDecoration:"none"}}>Back to Top</a> 
+        </div>
+    <div className='footer-panel2'>
+    <img src="https://images.ctfassets.net/y2ske730sjqp/1aONibCke6niZhgPxuiilC/2c401b05a07288746ddf3bd3943fbc76/BrandAssets_Logos_01-Wordmark.jpg?w=940" alt="logo" />
+    <div id='language'>
+        <FontAwesomeIcon icon="fa-regular fa-globe" />
+        <label for="languages">Choose a language:</label>
+        <select id="languages" name="languages">
+        <option value="">--Select--</option>
+        <option value="english">English</option>
+        <option value="hindi">Hindi</option>
+        <option value="spanish">Spanish</option>
+        <option value="french">French</option>
+        </select>
+    </div>
+
+    <ul>
+        <span className='section-header'>EXPLORE</span>
+        <li><a href="/Help-Center">Help Center</a></li>
+        <li><a href="/Account"> Account</a></li>
+        <li><a href="/Watch">Ways to Watch</a></li>
+        <li><a href="/Only on Netflix"></a></li>
+    </ul>
+
+    <ul>
+        <span className='section-header'>LEGAL</span>
+        <li><a href='Cookie'>Cookie Preferences</a></li>
+        <li><a href='Policy'>Privacy policy</a></li>
+        <li><a href='Terms'>Terms of Use</a></li>
+        <li><a href='Terms'>Gift Card Terms</a></li>
+        <li><a href='Notices'>Legal Notices</a></li>
+        <li><a href='Information'>Corporate Information</a></li>
+    </ul>
+
+        <ul>
+        <span className='section-header'>SUPPORT</span>
+        <li><a href='FAQ'>FAQ</a></li>
+        <li><a href='Test'>Speed Test</a></li>
+        <li><a href='Contact'>Contact Us</a></li>
+        <li><a href='Jobs'>Jobs</a></li>
+        <li><a href='Media'>Media Center</a></li>
+        <li><a href='Investor-Relations'>Investor Relations</a></li>
+    </ul>
+    </div>
+    </footer>
+  )
+}
+
+export default Footer;
