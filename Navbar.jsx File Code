@@ -1,0 +1,43 @@
+import { FaHeart, FaShoppingCart } from 'react-icons/fa';
+import './Navbar.css';
+import {Link} from 'react-router-dom';
+
+
+const Navbar = ({ favouritecount =0 , cartcount =0 }) => {
+  return (
+    <div className="Navbar">
+      <img src="https://images.ctfassets.net/y2ske730sjqp/1aONibCke6niZhgPxuiilC/2c401b05a07288746ddf3bd3943fbc76/BrandAssets_Logos_01-Wordmark.jpg?w=940" alt="logo" />
+      <div id="links">
+        <Link to="/Home">Home</Link>
+        <Link to="/About">About</Link>
+        <Link to="/Contact">Contact</Link>
+      </div>
+      <div id="buttons">
+        <Link to="/Favourite">
+        <button id='favourite' className='icon-button'>
+          <span className="icon-container">
+            <FaHeart />
+            {favouritecount > 0 && (
+              <p className='count'>{favouritecount}</p>
+            )}
+          </span>
+        </button>
+        </Link>
+        
+        <Link to="/Cart">
+        <button id="cart" className='icon-button'>
+          <span className="icon-container">
+            <FaShoppingCart />
+            {cartcount > 0 && (
+              <p className='count'>{cartcount}</p>
+            )}
+          </span>
+        </button>
+        </Link>
+        
+      </div>
+    </div>
+  );
+};
+
+export default Navbar;
