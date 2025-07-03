@@ -1,0 +1,37 @@
+import React, { useEffect, useState } from 'react';
+import Navbar from './Navbar';
+import MovieCard from './MovieCard';
+
+const Cart = ({ favouritecount, cartcount }) => {
+  const [cartMovies, setCartMovies] = useState([]);
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("movieData")) || { favourites: [], cart: [] };
+    setCartMovies(data.cart);
+  }, []);
+
+  return (
+    <>
+      <Navbar favouritecount={favouritecount} cartcount={cartcount} />
+      <div className="movieList">
+        {cartMovies.length === 0 ? (
+          <p>Your cart is empty.</p>
+        ) : (
+          cartMovies.map((movie, index) => (
+            <MovieCard
+              key={index}
+              moviename={movie.moviename}
+              genre={movie.genre}
+              description={movie.description}
+              rating={movie.rating}
+              imageUrl={movie.imageUrl}
+              hideButtons={true}
+            />
+          ))
+        )}
+      </div>
+    </>
+  );
+};
+
+export default Cart;
