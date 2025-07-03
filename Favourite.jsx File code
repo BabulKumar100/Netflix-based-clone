@@ -1,0 +1,37 @@
+import React, { useEffect, useState } from 'react';
+import Navbar from './Navbar';
+import MovieCard from './MovieCard';
+
+const Favourite = ({ favouritecount, cartcount }) => {
+  const [favouriteMovies, setFavouriteMovies] = useState([]);
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("movieData")) || { favourites: [], cart: [] };
+    setFavouriteMovies(data.favourites);
+  }, []);
+
+  return (
+    <>
+      <Navbar favouritecount={favouritecount} cartcount={cartcount} />
+      <div className="movieList">
+        {favouriteMovies.length === 0 ? (
+          <p>No movies in favourites yet.</p>
+        ) : (
+          favouriteMovies.map((movie, index) => (
+            <MovieCard
+              key={index}
+              moviename={movie.moviename}
+              genre={movie.genre}
+              description={movie.description}
+              rating={movie.rating}
+              imageUrl={movie.imageUrl}
+              hideButtons={true}
+            />
+          ))
+        )}
+      </div>
+    </>
+  );
+};
+
+export default Favourite;
