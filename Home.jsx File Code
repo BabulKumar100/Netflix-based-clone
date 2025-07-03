@@ -1,0 +1,26 @@
+import React from 'react';
+import Netflix from './Netflix';
+
+const Home = ({ 
+  favouritecount, 
+  cartcount, 
+  setFavouriteCount, 
+  setCartCount,
+  movieStatus,
+  setMovieStatus,
+  moviesArray
+}) => {
+  return (
+    <Netflix 
+      favouritecount={favouritecount} 
+      cartcount={cartcount} 
+      setFavouriteCount={setFavouriteCount} 
+      setCartCount={setCartCount}
+      movieStatus={movieStatus}
+      setMovieStatus={setMovieStatus}
+      moviesArray={moviesArray}
+    />
+  );
+};
+
+export default Home;
