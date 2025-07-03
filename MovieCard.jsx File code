@@ -1,0 +1,134 @@
+import './MovieCard.css';
+
+const MovieCard = ({
+  moviename,
+  genre,
+  description,
+  rating,
+  imageUrl,
+  setFavouriteCount,
+  setCartCount,
+  favouritecount,
+  cartcount,
+  ismovieAdded = false,
+  iscartAdded = false,
+  toggleFavourite,
+  toggleCart,
+  hideButtons = false  
+}) => {
+
+  function handleAddtoFavourites() {
+    if (!ismovieAdded) {
+      setFavouriteCount(favouritecount + 1);
+      alert(`${moviename} has been added to your favourites!`);
+      
+      
+      const existingData = JSON.parse(localStorage.getItem("movieData")) || {
+        favourites: [],
+        cart: []
+      };
+      
+      const newMovie = {
+        moviename,
+        description,
+        genre,
+        rating,
+        imageUrl,
+        addedAt: new Date().toISOString(), 
+        type: 'favourite'
+      };
+      
+      
+      existingData.favourites.push(newMovie);
+      
+      
+      localStorage.setItem("movieData", JSON.stringify(existingData));
+    } else {
+      setFavouriteCount(favouritecount - 1);
+      alert(`${moviename} removed from your favourites!`);
+      
+      
+      const existingData = JSON.parse(localStorage.getItem("movieData")) || {
+        favourites: [],
+        cart: []
+      };
+      
+      existingData.favourites = existingData.favourites.filter(
+        movie => movie.moviename !== moviename
+      );
+      
+      localStorage.setItem("movieData", JSON.stringify(existingData));
+    }
+    toggleFavourite();
+  }
+
+  function handleAddtoCarts() {
+    if (!iscartAdded) {
+      setCartCount(cartcount + 1);
+      alert(`${moviename} has been added to your cart!`);
+      
+      
+      const existingData = JSON.parse(localStorage.getItem("movieData")) || {
+        favourites: [],
+        cart: []
+      };
+      
+      const newMovie = {
+        moviename,
+        description,
+        genre,
+        rating,
+        imageUrl,
+        addedAt: new Date().toISOString(), 
+        type: 'cart'
+      };
+      
+
+      existingData.cart.push(newMovie);
+      
+      
+      localStorage.setItem("movieData", JSON.stringify(existingData));
+    } else {
+      setCartCount(cartcount - 1);
+      alert(`${moviename} removed from your cart!`);
+      
+      
+      const existingData = JSON.parse(localStorage.getItem("movieData")) || {
+        favourites: [],
+        cart: []
+      };
+      
+      existingData.cart = existingData.cart.filter(
+        movie => movie.moviename !== moviename
+      );
+      
+      localStorage.setItem("movieData", JSON.stringify(existingData));
+    }
+    toggleCart();
+  }
+
+  return (
+    <div className="MovieCard">
+      <img src={imageUrl} alt="Movie Poster" />
+      <h2>{moviename}</h2>
+      <h3>Genre: {genre}</h3>
+      <h3>Description: {description}</h3>
+      <h3>Rating: {rating}</h3>
+
+      
+      {!hideButtons && toggleFavourite && (
+        <button onClick={handleAddtoFavourites}>
+          {ismovieAdded ? "Remove from Favourite" : "Add to Favourite"}
+        </button>
+      )}
+
+      {!hideButtons && toggleCart && (
+        <button onClick={handleAddtoCarts}>
+          {iscartAdded ? "Remove from Cart" : "Add to Cart"}
+        </button>
+      )}
+    </div>
+  );
+};
+
+export default MovieCard;
