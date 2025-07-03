@@ -1,0 +1,102 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+body {
+  overflow-x: hidden;
+  font-family: Arial, sans-serif;
+  background-color: #14141491;
+  
+}
+
+
+.Navbar {
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: black; 
+  position: sticky; 
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+
+
+.Navbar img {
+  height: 80px;
+  width: 140px;
+}
+
+
+#links {
+  display: flex;
+  gap: 1rem;
+}
+
+#links a {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+#links a:hover {
+  color: #e50914;
+}
+
+
+#buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+#buttons button {
+   position: relative;
+  background-color: #e50914;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#buttons button:hover {
+  background-color: #f40612;
+}
+
+.icon-container {
+  position: relative;
+  display: inline-block;
+}
+
+.count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: black;
+  color: white;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.icon-button {
+  position: relative;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  color: white; 
+}
