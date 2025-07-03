@@ -1,0 +1,136 @@
+import React, {useEffect, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Favourite from './Favourite';
+import Netflix from './Netflix';
+import Cart from './Cart';
+import Home from './Home';
+import About from './About';
+import Contact from './Contact';
+
+
+  const moviesArray = [
+    {
+  moviename: "Iron Man 3",
+  genre: "Action/Sci-Fi",
+  description: "Tony Stark faces a powerful enemy known as the Mandarin and must rely on his ingenuity to protect those he loves.",
+  imageUrl: "Ironman.jpg",
+  rating: "7.1/10"
+},
+{
+  moviename: "Spider-Man: No Way Home",
+  genre: "Action/Adventure",
+  description: "Peter Parker's identity is revealed, bringing chaos into his life and leading him to seek help from Doctor Strange.",
+  imageUrl: "spiderman.jpg",
+  rating: "8.2/10"
+},
+{
+  moviename: "Avengers: Endgame",
+  genre: "Action/Sci-Fi",
+  description: "The Avengers assemble once more to reverse Thanos' actions and restore balance to the universe.",
+  imageUrl: "Avengers-end-game.jpg",
+  rating: "8.4/10"
+},
+{
+  moviename: "Avengers",
+  genre: "Action/Sci-Fi",
+  description: "Earth’s mightiest heroes team up to stop Loki and his alien army from enslaving humanity.",
+  imageUrl: "Avengers.jpg",
+  rating: "8.0/10"
+},
+{
+  moviename: "Interstellar",
+  genre: "Sci-Fi/Drama",
+  description: "A group of explorers travel through a wormhole in space in an attempt to save humanity from a dying Earth.",
+  imageUrl: "Interstellar.jpg",
+  rating: "8.6/10"
+},
+{
+  moviename: "Robot 2.0",
+  genre: "Action/Sci-Fi",
+  description: "Dr. Vaseegaran and his robot Chitti must battle a powerful winged entity wreaking havoc across the city.",
+  imageUrl: "Robot.jpg",
+  rating: "6.1/10"
+}
+
+
+  ];
+
+  
+function App() {
+
+  const [favouritecount, setFavouriteCount] = useState(0);
+  const [cartcount, setCartCount] = useState(0);
+
+  const [movieStatus, setMovieStatus] = useState(
+    moviesArray.map(() => ({
+      ismovieAdded: false,
+      iscartAdded: false
+    }))
+  );
+
+  useEffect(() => {
+    const stored = JSON.parse(localStorage.getItem("movieData")) || {
+      favourites: [],
+      cart: [],
+    };
+
+    setFavouriteCount(stored.favourites.length);
+    setCartCount(stored.cart.length);
+
+    localStorage.removeItem("movieData");
+
+    const status = moviesArray.map(movie => ({
+      ismovieAdded: stored.favourites.some(m => m.moviename === movie.moviename),
+      iscartAdded: stored.cart.some(m => m.moviename === movie.moviename),
+    }));
+
+    setMovieStatus(status);
+  }, []);
+
+
+  return (
+    <Routes>
+      <Route path="/" element={
+        <Netflix
+          favouritecount={favouritecount}
+          cartcount={cartcount}
+          setFavouriteCount={setFavouriteCount}
+          setCartCount={setCartCount}
+          movieStatus={movieStatus}
+          setMovieStatus={setMovieStatus}
+          moviesArray={moviesArray}
+        />
+      } />
+
+      <Route path="/Home" element={
+        <Home
+          favouritecount={favouritecount}
+          cartcount={cartcount}
+          setFavouriteCount={setFavouriteCount}
+          setCartCount={setCartCount}
+          movieStatus={movieStatus}
+          setMovieStatus={setMovieStatus}
+          moviesArray={moviesArray}
+        />
+      } />
+
+      <Route path="/Favourite" element={
+        <Favourite
+          favouritecount={favouritecount}
+          cartcount={cartcount}
+        />
+      } />
+      <Route path="/Cart" element={
+        <Cart
+          favouritecount={favouritecount}
+          cartcount={cartcount}
+        />
+      } />
+      <Route path="/About" element={<About />} />
+      <Route path="/Contact" element={<Contact />} />
+    </Routes>
+   
+  );
+}
+
+export default App;
